@@ -1,0 +1,14 @@
+{
+  "name" : "github-reason-list",
+  "reason" : {"react-jsx" : 2},
+  "bsc-flags": ["-bs-super-errors"],
+  "bs-dependencies": ["reason-react"],
+  "sources": [
+    {
+      "dir": "src",
+      "subdirs": [
+        "components"
+      ]
+    }
+  ]
+}
