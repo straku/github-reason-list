@@ -15,6 +15,8 @@
   "author": "",
   "license": "ISC",
   "dependencies": {
+    "bs-fetch": "github:buckletypes/bs-fetch",
+    "bs-json": "github:buckletypes/bs-json",
     "react": "^15.4.2",
     "react-dom": "^15.4.2",
     "reason-react": ">=0.2.1"
