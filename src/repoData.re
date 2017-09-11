@@ -12,7 +12,8 @@ let parseRepoJson json :repo => Json.Decode.{
   htmlUrl: field "html_url" string json
 };
 
-let parseRepoResponseJson json :array repo => Json.Decode.(field "items" (array parseRepoJson) json);
+let parseRepoResponseJson json :array repo =>
+  Json.Decode.field "items" (Json.Decode.array parseRepoJson) json;
 
 let fetchRepos () =>
   Bs_fetch.fetch reposUrl
