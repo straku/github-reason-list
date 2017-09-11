@@ -1,3 +1,5 @@
+open Glamor;
+
 type actions =
   | DownloadRepos (array RepoData.repo)
   | DownloadReposError;
@@ -8,6 +10,12 @@ type state = {
 };
 
 let component = ReasonReact.reducerComponent "App";
+
+let style = css [
+  display "flex",
+  flexDirection "column",
+  alignItems "center"
+];
 
 let make _children => {
   ...component,
@@ -45,10 +53,8 @@ let make _children => {
       | (None, None) => ReasonReact.stringToElement "Loading..."
       };
 
-    <div className="app">
-      <div className="app__header">
-        <h1>(ReasonReact.stringToElement "Reason Projects")</h1>
-      </div>
+    <div className=style>
+      <Header />
       repoItem
     </div>
   }
