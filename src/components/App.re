@@ -43,19 +43,15 @@ let make _children => {
     ReasonReact.NoUpdate;
   },
   render: fun { state } => {
-    let repoItem =
+    let element =
       switch (state.repos, state.error) {
-      | (Some repos, _) => ReasonReact.arrayToElement (Array.map
-          (fun (repo: RepoData.repo) => <RepoItem key=repo.fullName repo=repo />)
-          repos
-        );
+      | (Some repos, _) => <RepoList repos=repos />
       | (None, Some error) => ReasonReact.stringToElement error
       | (None, None) => ReasonReact.stringToElement "Loading..."
       };
 
     <div className=style>
-      <Header />
-      repoItem
+      element
     </div>
   }
 };

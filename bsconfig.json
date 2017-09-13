@@ -6,14 +6,10 @@
     "reason-react",
     "bs-fetch",
     "bs-json",
-    "bs-glamor",
+    "bs-glamor"
   ],
   "sources": [
-    {
-      "dir": "src",
-      "subdirs": [
-        "components"
-      ]
-    }
+    "src",
+    "src/components"
   ]
 }
