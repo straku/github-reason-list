@@ -1,29 +1,25 @@
 {
   "name": "github-reason-list",
-  "private": true,
   "version": "0.1.0",
-  "description": "",
-  "main": "index.js",
+  "author": "Łukasz Strączyński <l.straczynski@hotmail.com>",
+  "license": "MIT",
   "scripts": {
-    "test": "echo \"Error: no test specified\" && exit 1",
-    "start": "bsb -make-world -w",
-    "build": "bsb -make-world",
-    "webpack": "webpack -w",
-    "clean": "bsb -clean-world"
+    "start": "react-scripts start",
+    "build": "react-scripts build",
+    "test": "react-scripts test --env=jsdom",
+    "eject": "react-scripts eject",
+    "prepare": "npm link bs-platform"
   },
-  "keywords": [],
-  "author": "",
-  "license": "ISC",
   "dependencies": {
-    "bs-fetch": "github:buckletypes/bs-fetch",
+    "bs-fetch": "0.2.0",
     "bs-glamor": "0.1.3",
-    "bs-json": "github:buckletypes/bs-json",
-    "react": "16.1.0",
-    "react-dom": "16.1.0",
-    "reason-react": "0.2.4"
+    "bs-json": "0.2.4",
+    "react": "^16.1.0",
+    "react-dom": "^16.1.0",
+    "reason-scripts": "0.7.0"
   },
   "devDependencies": {
-    "bs-platform": "2.0.0",
-    "webpack": "3.8.1"
+    "bs-jest": "0.2.0",
+    "reason-react": "0.2.4"
   }
 }
