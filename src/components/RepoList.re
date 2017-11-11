@@ -1,17 +1,16 @@
-let component = ReasonReact.statelessComponent "RepoList";
+let component = ReasonReact.statelessComponent("RepoList");
 
-let make repos::(repos: array RepoData.repo) _children => {
+let make = (~repos: array(RepoData.repo), _children) => {
   ...component,
-  render: fun _self =>
+  render: (_self) =>
     <section>
-      <header>
-        (ReasonReact.stringToElement "Reason repositories on GitHub")
-      </header>
+      <header> (ReasonReact.stringToElement("Reason repositories on GitHub")) </header>
       <ul>
-        (ReasonReact.arrayToElement (Array.map
-          (fun (repo: RepoData.repo) => <RepoItem key=repo.fullName repo=repo />)
-          repos
-        ))
+        (
+          ReasonReact.arrayToElement(
+            Array.map((repo: RepoData.repo) => <RepoItem key=repo.fullName repo />, repos)
+          )
+        )
       </ul>
     </section>
 };
