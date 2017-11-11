@@ -1,18 +1,8 @@
 {
-  "name" : "github-reason-list",
-  "reason" : {"react-jsx" : 2},
+  "name": "github-reason-list",
+  "reason": { "react-jsx": 2 },
+  "refmt": 3,
   "bsc-flags": ["-bs-super-errors"],
-  "bs-dependencies": [
-    "reason-react",
-    "bs-fetch",
-    "bs-json"
-  ],
-  "sources": [
-    {
-      "dir": "src",
-      "subdirs": [
-        "components"
-      ]
-    }
-  ]
+  "bs-dependencies": ["reason-react", "bs-fetch", "bs-json", "bs-glamor"],
+  "sources": ["src", "src/components"]
 }
