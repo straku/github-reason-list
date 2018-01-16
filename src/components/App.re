@@ -11,14 +11,16 @@ type state = {
 
 let component = ReasonReact.reducerComponent("App");
 
-let style = css([display("flex"), flexDirection("column"), alignItems("center")]);
+let style =
+  css([display("flex"), flexDirection("column"), alignItems("center")]);
 
-let make = (_children) => {
+let make = _children => {
   ...component,
   initialState: () => {repos: None, error: None},
   reducer: (action, state) =>
     switch action {
-    | DownloadRepos(repos) => ReasonReact.Update({...state, repos: Some(repos)})
+    | DownloadRepos(repos) =>
+      ReasonReact.Update({...state, repos: Some(repos)})
     | DownloadReposError =>
       ReasonReact.Update({
         ...state,
@@ -27,20 +29,16 @@ let make = (_children) => {
     },
   didMount: ({reduce}) => {
     RepoData.fetchRepos()
-    |> Js.Promise.then_(
-         (repos) => {
-           reduce(() => DownloadRepos(repos), ());
-           Js.Promise.resolve()
-         }
-       )
-    |> Js.Promise.catch(
-         (_) => {
-           reduce(() => DownloadReposError, ());
-           Js.Promise.resolve()
-         }
-       )
+    |> Js.Promise.then_(repos => {
+         reduce(() => DownloadRepos(repos), ());
+         Js.Promise.resolve();
+       })
+    |> Js.Promise.catch((_) => {
+         reduce(() => DownloadReposError, ());
+         Js.Promise.resolve();
+       })
     |> ignore;
-    ReasonReact.NoUpdate
+    ReasonReact.NoUpdate;
   },
   render: ({state}) => {
     let element =
@@ -49,6 +47,6 @@ let make = (_children) => {
       | (None, Some(error)) => ReasonReact.stringToElement(error)
       | (None, None) => ReasonReact.stringToElement("Loading...")
       };
-    <div className=style> element </div>
+    <div className=style> element </div>;
   }
 };

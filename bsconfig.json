@@ -4,10 +4,10 @@
   "refmt": 3,
   "sources": ["src", "src/components"],
   "bs-dependencies": [
-    "reason-react",
-    "bs-jest",
+    "@glennsl/bs-jest",
+    "@glennsl/bs-json",
     "bs-fetch",
-    "bs-json",
-    "bs-glamor"
+    "bs-glamor",
+    "reason-react"
   ]
 }
