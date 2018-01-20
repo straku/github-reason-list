@@ -10,3 +10,9 @@ Added (in comparison to tutorial):
 
 Want to add:
 - lazy loading (by some button at the bottom or infinite scroll)
+
+## Notes
+
+If you want to run it locally you will have to provide your own personal access token here (public_repo scope is enough) https://github.com/straku/github-reason-list/blob/master/src/data.re#L14
+
+There seems to be no way of using github graphql API without the token, so without turning it into full OAuth app with user login through github to get the token I won't be able to provide working online demo, which is a shame 😢
