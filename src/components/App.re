@@ -1,11 +1,11 @@
 open Glamor;
 
 type actions =
-  | DownloadRepos(array(RepoData.repo))
+  | DownloadRepos(array(Data.repo))
   | DownloadReposError;
 
 type state = {
-  repos: option(array(RepoData.repo)),
+  repos: option(array(Data.repo)),
   error: option(string)
 };
 
@@ -27,26 +27,27 @@ let make = _children => {
         error: Some("Encountered error while trying to download repositories")
       })
     },
-  didMount: ({reduce}) => {
-    RepoData.fetchRepos()
+  didMount: ({send}) => {
+    Data.getRepos(~after=None, ~first=50)
     |> Js.Promise.then_(repos => {
-         reduce(() => DownloadRepos(repos), ());
+         send(DownloadRepos(repos));
          Js.Promise.resolve();
        })
     |> Js.Promise.catch((_) => {
-         reduce(() => DownloadReposError, ());
+         send(DownloadReposError);
          Js.Promise.resolve();
        })
     |> ignore;
     ReasonReact.NoUpdate;
   },
-  render: ({state}) => {
-    let element =
-      switch (state.repos, state.error) {
-      | (Some(repos), _) => <RepoList repos />
-      | (None, Some(error)) => ReasonReact.stringToElement(error)
-      | (None, None) => ReasonReact.stringToElement("Loading...")
-      };
-    <div className=style> element </div>;
-  }
+  render: ({state}) =>
+    <div className=style>
+      (
+        switch (state.repos, state.error) {
+        | (Some(repos), _) => <RepoList repos />
+        | (None, Some(error)) => ReasonReact.stringToElement(error)
+        | (None, None) => ReasonReact.stringToElement("Loading...")
+        }
+      )
+    </div>
 };

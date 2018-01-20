@@ -7,7 +7,8 @@
     "start": "react-scripts start",
     "build": "react-scripts build",
     "test": "react-scripts test --env=jsdom",
-    "eject": "react-scripts eject"
+    "eject": "react-scripts eject",
+    "analyze-bundle": "node scripts/analyze-bundle.js"
   },
   "dependencies": {
     "@glennsl/bs-json": "^1.1.0",
@@ -20,6 +21,7 @@
     "@glennsl/bs-jest": "^0.3.2",
     "bs-platform": "^2.1.0",
     "reason-react": "^0.3.1",
-    "reason-scripts": "^0.8.0"
+    "reason-scripts": "^0.8.0",
+    "webpack-bundle-analyzer": "^2.9.2"
   }
 }
