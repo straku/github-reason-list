@@ -23,10 +23,10 @@ let make = (~repos: array(Data.repo), _children) => {
           ReasonReact.arrayToElement(
             Array.map(
               (repo: Data.repo) => <RepoItem key=repo.cursor repo />,
-              repos
-            )
+              repos,
+            ),
           )
         )
       </ul>
-    </section>
+    </section>,
 };

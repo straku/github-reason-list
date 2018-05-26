@@ -15,7 +15,7 @@ let make = (~repo: Data.repo, _children) => {
           padding("20px 4px"),
           borderStyle("solid"),
           borderWidth("1px 0 0"),
-          borderColor("#eaecef")
+          borderColor("#eaecef"),
         ])
       )>
       <a
@@ -28,18 +28,20 @@ let make = (~repo: Data.repo, _children) => {
             textDecoration("none"),
             fontSize("18px"),
             fontWeight("600"),
-            marginBottom("16px")
+            marginBottom("16px"),
           ])
         )>
         <img
           src=repo.ownerAvatarUrl
-          className=(css([width("36px"), height("36px"), marginRight("16px")]))
+          className=(
+            css([width("36px"), height("36px"), marginRight("16px")])
+          )
         />
         (s(repo.ownerLogin ++ " / " ++ repo.name))
       </a>
       <div className=(css([marginBottom("10px")]))>
         (
-          switch repo.description {
+          switch (repo.description) {
           | Some(desc) => s(desc)
           | None => ReasonReact.nullElement
           }
@@ -51,12 +53,12 @@ let make = (~repo: Data.repo, _children) => {
         </div>
         <div>
           (
-            switch repo.language {
+            switch (repo.language) {
             | Some(lang) => s(lang)
             | None => ReasonReact.nullElement
             }
           )
         </div>
       </div>
-    </li>
+    </li>,
 };

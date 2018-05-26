@@ -6,7 +6,7 @@ type repo = {
   ownerLogin: string,
   ownerAvatarUrl: string,
   stars: int,
-  language: option(string)
+  language: option(string),
 };
 
 let url = "https://api.github.com/graphql";
@@ -58,15 +58,19 @@ let parseEdge = json : repo =>
     ownerAvatarUrl: at(["node", "owner", "avatarUrl"], string, json),
     stars: at(["node", "stargazers", "totalCount"], int, json),
     language:
-      at(["node", "languages", "nodes"], array(field("name", string)), json)
-      |> parseLanguages
+      at(
+        ["node", "languages", "nodes"],
+        array(field("name", string)),
+        json,
+      )
+      |> parseLanguages,
   };
 
 let parseData = json : array(repo) =>
   Json.Decode.at(
     ["data", "search", "edges"],
     Json.Decode.array(parseEdge),
-    json
+    json,
   );
 
 let parseResponse = (text: string) => Js.Json.parseExn(text) |> parseData;
@@ -80,13 +84,13 @@ let makeBody = (first: int, after: option(string)) =>
         ("first", Json.Encode.int(first)),
         (
           "after",
-          switch after {
+          switch (after) {
           | Some(x) => Json.Encode.string(x)
           | None => Json.Encode.null
-          }
-        )
-      ])
-    )
+          },
+        ),
+      ]),
+    ),
   ])
   |> Json.stringify;
 
@@ -97,8 +101,8 @@ let getRepos = (~after, ~first) =>
       ~method_=Fetch.Post,
       ~body=Fetch.BodyInit.make(makeBody(first, after)),
       ~headers=Fetch.HeadersInit.make({"authorization": "bearer " ++ token}),
-      ()
-    )
+      (),
+    ),
   )
   |> Js.Promise.then_(res => Fetch.Response.text(res))
   |> Js.Promise.then_(text => Js.Promise.resolve(parseResponse(text)));
